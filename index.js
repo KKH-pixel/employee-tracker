@@ -1,7 +1,9 @@
+const fs = require('fs');
 const inquirer = require("inquirer");
 const Employee = require("./lib/Employee");
-const Company = require("./Company")
-// const person = [new Employee("")];
+const Company = require("./lib/Company");
+const generateHTML = require("./generateHTML");
+
 
 let company = new Company()
 
@@ -38,7 +40,7 @@ function askManager() {
         company.print()
         empChoice()
     })
-    
+
 }
 
 function askEngineer() {
@@ -46,7 +48,7 @@ function askEngineer() {
     {
         name: "git",
         type: "input",
-        message: "Add a GitHub link:", 
+        message: "Add GitHub name:", 
     })).then(answers => {
         console.log(`Name: ${answers.name}`)
         console.log(`ID: ${answers.id}`)
@@ -54,6 +56,7 @@ function askEngineer() {
         console.log(`GitHub link: ${answers.git}`)
         company.addEngineer(answers.name, answers.id, answers.email, answers.git)
         company.print()
+        empChoice()
     })     
 }
 
@@ -70,6 +73,7 @@ function askIntern() {
         console.log(`Office #: ${answers.school}`)
         company.addIntern(answers.name, answers.id, answers.email, answers.school)
         company.print()
+        empChoice()
     })     
 }
 
@@ -89,62 +93,18 @@ function empChoice(){
             case "Add an intern":
                 askIntern();
                 break;
+            case "Finish":
+                createHtml();
+                break;
             }
     })
 }
 
+function createHtml() {
+    fs.writeFile('./Develop/index.html', generateHTML(company.allEmployees), (err) =>
+    err ? console.log(err) : console.log('Success!')
+  );
+}
+
 askManager()
 
-
-
-
-
-
-
-
-
-
-// function askQuestion() {
-//     inquirer.prompt([
-//         {
-//             name: "office",
-//             type: "number",
-//             message: "Add an office number:", 
-//         }
-//         {
-//             name: "link",
-//             type: "input",
-//             message: "Add a GitHub link:", 
-//             // validate: 
-//         }
-//         {
-//             name: "school",
-//             type: "input",
-//             message: "Add an intern's school:", 
-//         }
-            
-
-
-
-
-
-
-
-
-
-
-
-
-//     ]).then(answers => {
-//         switch (answers.question) {
-//             case "Add an employee name":
-//                 console.log("Add an employee name:")
-//                 addEmployee();
-//                 break;
-
-//             default:
-//                 console.log("New employee logged.")
-//                 break;
-//         }
-//     })
-// }
