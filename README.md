@@ -16,8 +16,8 @@ This is a simple program that allows you to enter employee information via a ter
 
 ## Usage
 
-![Screenshot](screenshot1.png)
-![Screenshot](screenshot2.png)
+![Screenshot](screenshots/screenshot1.png)
+![Screenshot](screenshots/screenshot2.png)
 
 The program will prompt you with a series of questions. Simply fill out each prompt with the correct information. Once complete, the program will auto-create a READme file. 
 
